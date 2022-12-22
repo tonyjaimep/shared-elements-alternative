@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { PortalHost, PortalProvider } from "@gorhom/portal";
+import { FlatList, StyleSheet, View } from "react-native";
+
+import { Foo } from "./src/Foo";
+
+const flatListData = Array.from({ length: 10 }).map((_, index) => index);
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <PortalProvider>
+      <View style={styles.container}>
+        {flatListData.map((a) => (
+          <Foo key={a} />
+        ))}
+      </View>
+    </PortalProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexWrap: "wrap",
+    paddingTop: 100,
+    backgroundColor: "#fff",
+    flexDirection: "row",
+    position: "relative",
   },
 });
